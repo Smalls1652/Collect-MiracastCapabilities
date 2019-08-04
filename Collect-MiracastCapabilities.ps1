@@ -1,6 +1,6 @@
 <#PSScriptInfo
 
-.VERSION 1909.8.1
+.VERSION 1909.8.1.1
 
 .GUID 30a2eb9a-8ae0-4811-bc0c-9a17644878d1
 
@@ -12,24 +12,24 @@
 
 .TAGS Miracast systeminformation
 
-.LICENSEURI
+.LICENSEURI 
 
 .PROJECTURI https://github.com/Smalls1652/Collect-MiracastCapabilities
 
-.ICONURI
+.ICONURI 
 
 .EXTERNALMODULEDEPENDENCIES 
 
-.REQUIREDSCRIPTS
+.REQUIREDSCRIPTS 
 
-.EXTERNALSCRIPTDEPENDENCIES
+.EXTERNALSCRIPTDEPENDENCIES 
 
 .RELEASENOTES
-1909.08.01 - Initial release.
-
-.PRIVATEDATA
+1909.08.01.01 - Fixed the switch statement when no network adapters or graphics cards are found.
 
 #> 
+
+
 
 
 
@@ -109,13 +109,11 @@ process {
     Write-Verbose "Collecting Miracast capable network adapters."
     $NetAdapters = Get-NetAdapter -Physical | NdisFilter
 
-    switch ($NetAdapters) {
-        #If there are no network adapters
-        {($NetAdapters | Measure-Object | Select-Object -ExpandProperty "Count") -eq 0} {
+    switch ($NetAdapters | Measure-Object | Select-Object -ExpandProperty "Count") {
+        0 {
             $NetAdapters = "N/A"
         }
     }
-
     Write-Verbose "Collecting system information from 'dxdiag'."
     $DxDiag = Collect-DxDiagInfo
 
@@ -127,9 +125,9 @@ process {
         }
     }
 
-    switch ($GraphicsCards) {
+    switch ($GraphicsCards | Measure-Object | Select-Object -ExpandProperty "Count") {
         #If there are no capable graphics cards
-        { ($GraphicsCards | Measure-Object | Select-Object -ExpandProperty "Count") -eq 0 } {
+        0 {
             $GraphicsCards = "N/A"
             $MiracastCapable = $false
             $HdcpCapable = $false
