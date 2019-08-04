@@ -1,6 +1,6 @@
 <#PSScriptInfo
 
-.VERSION 1909.08.01
+.VERSION 1909.8.1
 
 .GUID 30a2eb9a-8ae0-4811-bc0c-9a17644878d1
 
@@ -14,7 +14,7 @@
 
 .LICENSEURI
 
-.PROJECTURI
+.PROJECTURI https://github.com/Smalls1652/Collect-MiracastCapabilities
 
 .ICONURI
 
@@ -25,11 +25,13 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-
+1909.08.01 - Initial release.
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <#
 .SYNOPSIS
